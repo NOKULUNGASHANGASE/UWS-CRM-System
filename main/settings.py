@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'UwsStaffManagement',
     'Default',
     'accounts'
+    'Default.apps.DefaultConfig',
+
+
 ]
 
 MIDDLEWARE = [
@@ -66,6 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+
             ],
         },
     },
@@ -123,3 +128,4 @@ STATIC_URL = 'static/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+LOGIN_URL = '/'

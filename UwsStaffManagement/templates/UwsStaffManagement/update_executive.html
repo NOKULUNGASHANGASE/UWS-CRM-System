@@ -1,0 +1,24 @@
+{% extends "Default/base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Update Executive</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="name" value="{{ executive.name }}" class="form-control mb-3">
+
+        <input type="email" name="email" value="{{ executive.email }}" class="form-control mb-3">
+
+        <input type="text" name="phone" value="{{ executive.phone }}" class="form-control mb-3">
+
+        <textarea name="address" class="form-control mb-3">
+{{ executive.address }}
+        </textarea>
+
+        <button class="btn btn-success">Update</button>
+    </form>
+</div>
+
+{% endblock %}
