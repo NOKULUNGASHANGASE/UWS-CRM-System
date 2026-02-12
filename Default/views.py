@@ -11,6 +11,7 @@ def home(request):
 
 def index(request):
     return render(request, 'Default/index.html')
+
 def dashboard(request):
 
     

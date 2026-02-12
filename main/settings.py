@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'EventManagement',
     'UwsStaffManagement',
     'Default',
-    'accounts'
-    'Default.apps.DefaultConfig',
+    'accounts',
+    #'Default.apps.DefaultConfig',
 
 
 ]

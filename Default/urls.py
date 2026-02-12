@@ -23,12 +23,6 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', views.home,name="home"),
     path('admin/', admin.site.urls),
-
-
-    path("dashboard5/", views.dashboard5, name="dashboard5"),
-
-    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
-
     path('index',views.index,name= 'index'),
     path('dashboard',views.dashboard,name= 'dashboard'),
 
