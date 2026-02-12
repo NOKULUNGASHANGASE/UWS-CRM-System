@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.http import JsonResponse
 
+# Create your views here.
 
 def home(request):
 
@@ -9,8 +9,9 @@ def home(request):
 
 
 
+
 #@login_required
-def dashboard(request):
+def dashboard5(request):
 
     user = request.user
     role = None
@@ -35,5 +36,17 @@ def dashboard(request):
         "user": user,
     }
 
-    return render(request, "Default/dashboard.html", context)
+    return render(request, "Default/dashboard5.html", context)
+
+
+def index(request):
+    return render(request, 'Default/index.html')
+def dashboard(request):
+    return render(request, 'Default/dashboard.html')
+
+def dasboardbase(request):
+    return render(request,'dashboardbase.html')
+
+def base(request):
+    return render(request,'base2.html')
 

@@ -1,0 +1,177 @@
+{% extends 'Default/base2.html' %}{% block content %} {%load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>uMngeni Water Services</title>
+    <link rel="stylesheet" href="{% static 'Default/stylesLandingPage.css' %}" />
+    
+  </head>
+   <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <h1>
+          
+            <span class="highlight">uMngeni Water Services</span><br />CRM System
+          </h1>
+          <p class="tagline">
+            The new purpose-built system to harness efficiency and transform
+            water service management.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn-primary"></button>
+            <button class="btn-secondary"></button>
+            <button class="btn-primary"></button>
+            <button class="btn-secondary"></button>
+            <button class="btn-primary"></button>
+            <button class="btn-secondary"></button>
+          </div>
+        </div>
+        <div class="mockup">
+          <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-num">15.2K</div>
+              <div class="stat-label">Active Customers</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">99.1%</div>
+              <div class="stat-label">System Uptime</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">32min</div>
+              <div class="stat-label">Avg Response</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">4.8★</div>
+              <div class="stat-label">User Rating</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="section-header">
+        <span class="badge">Powerful Features</span>
+        <h2>Built For You By uMngeni Water Service Excellence</h2>
+        <p>
+          Everything you need to manage customers, optimize operations, and
+          deliver exceptional water services.
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3>Customer Data Management</h3>
+          <p>
+            Centralised customer database with full history. Segment by
+            industry, location, and needs. Automatic data cleaning and duplicate
+            removal.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>Incident & Interaction Management</h3>
+          <p>
+            Auto-generate reference numbers with SMS/WhatsApp confirmation.
+            Colour-coded categorisation, automated reminders, and geo-tagged
+            reporting.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💼</div>
+          <h3>Sales & Pipeline Management</h3>
+          <p>
+            Track leads and qualify opportunities. Automated follow-ups, deal
+            management, and comprehensive sales forecasting.
+          </p>
+        </div>
+        
+    </section>
+
+    <section class="cta">
+      <div class="cta-content">
+        <h2>
+          Ready to Transform Your<br /><span class="highlight"
+            >Water Services?</span
+          >
+        </h2>
+        <p>Join leading utilities using uMngeni Water Services to deliver excellence.</p>
+      </div>
+    </section>
+<footer>
+  <div class="footer-content">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img
+          src="{% static 'Default/images/UWS-logo.png' %}"
+          alt="uMngeni"
+        />
+        <p>
+          uMngeni Water Services (UWS) is dedicated to delivering sustainable,
+          high-quality water and sanitation solutions that drive economic
+          growth and social development across KwaZulu-Natal and beyond.
+        </p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#">Corporate Profile</a></li>
+          <li><a href="#">Organisation Structure</a></li>
+          <li><a href="#">Services & Operations</a></li>
+          <li><a href="#">News</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Get In Touch</h3>
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>031 816 5300</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>uwsinfo@uuw.co.za</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>6 The Blvd Westway Office Park, Dawncliffe, Westville, 3629</span>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Subscribe</h3>
+        <form class="subscribe-form">
+          <input type="text" placeholder="Name" required />
+          <input type="email" placeholder="Email" required />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="social-links">
+      <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-tumblr"></i></a>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 uMngeni Water Services. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+    
+  </body>
+</html>
+{% endblock %}
