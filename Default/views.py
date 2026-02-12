@@ -9,10 +9,11 @@ def home(request):
 
 
 
+def index(request):
+    return render(request, 'Default/index.html')
+def dashboard(request):
 
-#@login_required
-def dashboard5(request):
-
+    
     user = request.user
     role = None
 
@@ -35,14 +36,8 @@ def dashboard5(request):
         "role": role,
         "user": user,
     }
-
-    return render(request, "Default/dashboard5.html", context)
-
-
-def index(request):
-    return render(request, 'Default/index.html')
-def dashboard(request):
-    return render(request, 'Default/dashboard.html')
+    
+    return render(request, 'Default/dashboard.html', context)
 
 def dasboardbase(request):
     return render(request,'dashboardbase.html')
