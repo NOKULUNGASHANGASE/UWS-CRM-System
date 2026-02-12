@@ -1,0 +1,26 @@
+<h1>Welcome {{ user.username }}</h1>
+<h2>Role: {{ role }}</h2>
+
+<hr>
+
+{% if role == "Executive" %}
+    <h3>Executive Panel</h3>
+    <a href="">Manage Executives</a><br>
+    <a href="">Manage Divisions</a>
+
+{% elif role == "Manager" %}
+    <h3>Manager Panel</h3>
+    <a href="">View Divisions</a>
+
+{% elif role == "UwsAdmin" %}
+    <h3>Admin Panel</h3>
+    <p>Manage events and clients</p>
+
+{% elif role == "ClientAdmin" %}
+    <h3>Client Admin Panel</h3>
+    <p>Manage client users</p>
+
+{% else %}
+    <h3>Client Panel</h3>
+    <p>View events</p>
+{% endif %}

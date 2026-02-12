@@ -16,7 +16,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+   path('create_executive/', views.create_executive, name="create_executive"),
+    path('executive_list', views.executive_list, name="executive_list"),
+    path('update_executive/<int:pk>/', views.update_executive, name="update_executive"),
+    path('delete_executive/<int:pk>/', views.delete_executive, name="delete_executive"),
+
+
+    path('create_division',views.create_division, name="create_division" ),
+    path('division_list' ,views.division_list, name="division_list"),
+    path('update_division/<int:pk>/', views.update_division, name='update_division'),
+
+   path('delete_division/<int:pk>/', views.delete_division, name='delete_division'),
+
+   path("assign_manager", views.assign_manager, name="assign_manager"), 
+   path("manager_list", views.manager_list, name="manager_list"), 
+   path("managers/update/<int:pk>/", views.update_manager, name="update_manager"),
+    
+
 ]
