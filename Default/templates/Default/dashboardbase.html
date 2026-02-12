@@ -24,6 +24,81 @@
     ></script>
   </head>
   <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">
+            UWS CRM
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Dashboard</a>
+                    </li>
+
+                    <!-- Client Management -->
+                    {% if user.groups.all.0.name == "ClientAdmin" %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Clients</a>
+                        </li>
+                    {% endif %}
+
+                    <!-- Event Management -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Events</a>
+                    </li>
+
+                    <!-- Staff Management -->
+                    {% if user.groups.all.0.name == "Admin" or user.groups.all.0.name == "Executive" %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Staff</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+
+                <!-- Right Side -->
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                              data-bs-toggle="dropdown">
+                                {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <span class="dropdown-item-text small text-muted">
+                                        Role:
+                                        {% for group in user.groups.all %}
+                                            {{ group.name }}
+                                        {% endfor %}
+                                    </span>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="">
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-logo">
@@ -32,6 +107,10 @@
           alt="uMngeni Water Services"
         />
       </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
       <nav>
         <div class="nav-section">
@@ -97,6 +176,19 @@
         </div>
       </nav>
 
+
+      {% if user.is_authenticated %}
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-info">
+                    <strong>Logged in as:</strong>
+                    {% for group in user.groups.all %}
+                        <span class="badge bg-primary">{{ group.name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
       <!-- Sidebar Footer (Optional - for social icons) -->
       <div class="sidebar-footer">
         <div class="social-links">
@@ -119,6 +211,9 @@
         </p>
       </div>
     </aside>
+    <footer class="bg-white border-top py-3 text-center small text-muted">
+          © {{ now|date:"Y" }} uMngeni Water Services – CRM System
+    </footer>
     {% block content %} {% endblock %}
   </body>
 </html>

@@ -38,6 +38,7 @@ class UwsAdmin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     UwsAdminId= models.AutoField(primary_key=True)
     DivisionId= models.ForeignKey(Division, on_delete=models.DO_NOTHING, null=True,blank=True)
+    ManagerId= models.ForeignKey(Manager, on_delete=models.DO_NOTHING, null=True,blank=True)
     Tittle = models.TextField(blank=True)
     phone = models.CharField(max_length=20)
     
