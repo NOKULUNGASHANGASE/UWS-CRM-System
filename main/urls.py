@@ -22,6 +22,7 @@ urlpatterns = [
     path('',include('Default.urls')),
     path('UwsStaffManagement/',include('UwsStaffManagement.urls')),
     path('EventManagement/',include('EventManagement.urls')),
-    path('ClientManagement/',include('ClientManagement.urls'))
+    path('ClientManagement/',include('ClientManagement.urls')),
+    path('accounts/', include('accounts.urls')),
 
 ]
