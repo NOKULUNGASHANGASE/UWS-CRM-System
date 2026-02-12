@@ -1,0 +1,41 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>uMngeni Water Services</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'Default/stylesLandingPage.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-content">
+        <img
+          src="{% static 'Default/images/UWS-logo.png' %}"
+          alt="uMngeni"
+          class="logo"
+        />
+        <ul class="nav-links">
+          <li><a href="#features">Events</a></li>
+          <li><a href="#solutions">Solutions</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><button class="btn-nav">Login</button></li>
+        </ul>
+      </div>
+    </nav>
+
+    {% block content %} {% endblock %}
+  </body>
+</html>
