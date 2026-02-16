@@ -11,6 +11,9 @@ import string
 import secrets
 from django.core.mail import send_mail
 from django.conf import settings
+from .sendemail import send_manager_assignment_email, send_password_update_email
+
+
 
 
 def create_executive(request):
@@ -128,8 +131,8 @@ def assign_manager(request):
 
         # letCheck if user exists
         if User.objects.filter(username=email).exists():
-            error = "A user with this email already exists"
-            return render(request, "UwsStaffManagement/assign_manager.html", {"divisions": divisions, "error": error})
+           messages.error = (request,"A user with this email already exists")
+           return render(request, "UwsStaffManagement/assign_manager.html", {"divisions": divisions})
         else:
 
             generated_password = generate_password()
@@ -152,34 +155,13 @@ def assign_manager(request):
             Tittle=title,
             phone=phone
         )
-
-        subject = "Manager Assign role - UWS CRM System"
-
-        message = f"""
-                    Hello {first_name} {last_name},
-
-                    Congratulations! You have been assigned as a Manager for:
-
-                    Division: {division.name}
-
-                    Your login details:
-
-                    Username: {email}
-                    Password: {generated_password}
-
-                    Please log in and change your password immediately.
-
-                    Best regards,
-                    uMngeni Water Services CRM System
-                    """
-
-        send_mail(
-            subject,
-            message,
-            settings.DEFAULT_FROM_EMAIL,
-            [email],
-            fail_silently=False,
-        )
+        send_manager_assignment_email(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                division_name=division.name,
+                generated_password=generated_password,
+            )
 
         return redirect("manager_list")
 
@@ -208,19 +190,12 @@ def manager_list(request):
 @role_required("Executive")
 def update_manager(request, pk):
     executive = get_object_or_404(Executive, user=request.user)
-
-    # Only allow editing managers under this executive
-    manager = get_object_or_404(
-        Manager,
-        pk=pk,
-        DivisionId__ExecutiveId=executive
-    )
-
+    manager = get_object_or_404( Manager, pk=pk, DivisionId__ExecutiveId=executive)
     divisions = Division.objects.filter(ExecutiveId=executive)
 
     if request.method == "POST":
 
-        # --- Update Django User ---
+        
         user = manager.user
         user.first_name = request.POST.get("first_name")
         user.last_name = request.POST.get("last_name")
@@ -228,45 +203,18 @@ def update_manager(request, pk):
 
         new_password = request.POST.get("password")
 
-        # If password entered → reset it
+        
+        
         if new_password:
             user.set_password(new_password)
+            send_password_update_email(user, new_password)
+                    
 
-            # ✅ Send password update email
-            subject = "Password Updated - UWS CRM System"
+            user.save()
 
-            message = f"""
-                        Hello {user.first_name},
-
-                        Your manager account password has been updated.
-
-                        New login details:
-
-                        Username: {user.username}
-                        Password: {new_password}
-
-                        If you did not request this change, contact support immediately.
-
-                        UWS CRM System
-                        """
-
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                [user.email],
-                fail_silently=False,
-            )
-
-        user.save()
-
-        # --- Update Manager fields ---
+       
         division_id = request.POST.get("division")
-        manager.DivisionId = get_object_or_404(
-            Division,
-            pk=division_id,
-            ExecutiveId=executive
-        )
+        manager.DivisionId = get_object_or_404( Division, pk=division_id, ExecutiveId=executive)
 
         manager.Tittle = request.POST.get("title")
         manager.phone = request.POST.get("phone")
