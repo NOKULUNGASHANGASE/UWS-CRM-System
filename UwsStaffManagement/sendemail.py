@@ -1,3 +1,4 @@
+from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -7,7 +8,7 @@ def send_manager_assignment_email(
     last_name,
     email,
     division_name,
-    password,
+    generated_password,
 ):
 
     subject = "Manager Assignment - UWS CRM System"
@@ -22,7 +23,7 @@ Division: {division_name}
 Login details:
 
 Username: {email}
-Password: {password}
+Password: {generated_password}
 
 Please log in and change your password.
 

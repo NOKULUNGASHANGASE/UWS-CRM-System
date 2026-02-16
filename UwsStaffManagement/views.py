@@ -129,24 +129,40 @@ def assign_manager(request):
         title = request.POST.get("title")
         phone = request.POST.get("phone")
 
-        # letCheck if user exists
-        if User.objects.filter(username=email).exists():
-           messages.error = (request,"A user with this email already exists")
-           return render(request, "UwsStaffManagement/assign_manager.html", {"divisions": divisions})
+        if not division_id: 
+            messages.error(request, "please select a division.")
+            divisions = Division.objects.all()
+            return render(request, "UwsStaffManagement/assign_manager.html", {"divisions": divisions})
+       
+       
+        division = get_object_or_404(Division, pk=division_id)
+
+        generated_password = generate_password()
+        user = User.objects.filter(username=email).first()
+
+        if user:
+            # If user already has a manager profile
+            if Manager.objects.filter(user=user).exists():
+                messages.error(request, "This user is already a manager.")
+                return render(request,"UwsStaffManagement/assign_manager.html", {"divisions": divisions},)
+
+        
+        
         else:
 
-            generated_password = generate_password()
-            # let Create user here taking from the django user
+            #generated_password = generate_password()
+                # let Create user here taking from the django user
             user = User.objects.create_user(
                 username=email,
                 email=email,
                 first_name=first_name,
                 last_name=last_name,
-                password=generated_password 
-                
+                #password=generated_password 
+                    
             )
 
-        division = get_object_or_404(Division, pk=division_id)
+        #division = get_object_or_404(Division, pk=division_id)
+
         assign_user_to_group(user, "Manager")
 
         Manager.objects.create(
@@ -155,13 +171,16 @@ def assign_manager(request):
             Tittle=title,
             phone=phone
         )
+
+        messages.success(request, "Manager assigned successfully!")
+        
         send_manager_assignment_email(
-                first_name=first_name,
-                last_name=last_name,
-                email=email,
-                division_name=division.name,
-                generated_password=generated_password,
-            )
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            division_name=division.name,
+            generated_password=generated_password,
+        )
 
         return redirect("manager_list")
 
@@ -194,6 +213,11 @@ def update_manager(request, pk):
     divisions = Division.objects.filter(ExecutiveId=executive)
 
     if request.method == "POST":
+        division_id = request.POST.get("division")
+        if not division_id or not division_id.isdigit():
+            messages.error(request,  "Please select a valid division." )
+            return render(request, "UwsStaffManagement/update_manager.html", {"manager": manager, "divisions": divisions,})
+
 
         
         user = manager.user
@@ -210,7 +234,7 @@ def update_manager(request, pk):
             send_password_update_email(user, new_password)
                     
 
-            user.save()
+        user.save()
 
        
         division_id = request.POST.get("division")
