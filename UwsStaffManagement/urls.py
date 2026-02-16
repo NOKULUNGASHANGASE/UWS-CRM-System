@@ -35,7 +35,7 @@ urlpatterns = [
 
    path("assign_manager", views.assign_manager, name="assign_manager"), 
    path("manager_list", views.manager_list, name="manager_list"), 
-   path("managers/update/<int:pk>/", views.update_manager, name="update_manager"),
+   path("update_manager/<int:pk>/", views.update_manager, name="update_manager"),
     
 
 ]
