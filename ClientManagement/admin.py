@@ -2,8 +2,8 @@ from django.contrib import admin
 from .models import *
 
 
-admin.site.register(ClientAdmin)
-admin.site.register(Client)
+admin.site.register(OrganisationAdmin)
+admin.site.register(Organisation)
 admin.site.register(ClientDivision)
 
 

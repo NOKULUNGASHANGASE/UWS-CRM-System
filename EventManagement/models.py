@@ -1,6 +1,6 @@
 from django.db import models
 #from django.contrib.auth.models import User
-from ClientManagement.models import Client
+from ClientManagement.models import Organisation
 from UwsStaffManagement.models import UwsAdmin, Division, Manager
 
 class Event(models.Model):
@@ -18,7 +18,7 @@ class Event(models.Model):
         return self.title
 class Attendee(models.Model):
     AttendeeId= models.AutoField(primary_key=True)
-    ClientId = models.ForeignKey(Client, on_delete=models.CASCADE)
+    ClientId = models.ForeignKey(Organisation, on_delete=models.CASCADE)
     EventId = models.ForeignKey(Event, on_delete=models.SET_NULL, null=True, blank=True)
     full_name = models.CharField(max_length=255)
     email = models.EmailField()

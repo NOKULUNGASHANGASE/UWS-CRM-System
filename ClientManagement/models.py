@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from UwsStaffManagement.models import Division
 
 
-class ClientAdmin(models.Model):
+class OrganisationAdmin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     ClientAdminId=models.AutoField(primary_key=True)
     
@@ -13,16 +13,16 @@ class ClientAdmin(models.Model):
         return f"{self.user.username} - {self.client.name}"
 
 
-class Client(models.Model):
+class Organisation(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     ClientId=models.AutoField(primary_key=True)
-    ClientAdminId = models.ForeignKey(ClientAdmin, on_delete=models.CASCADE)
+    ClientAdminId = models.ForeignKey(OrganisationAdmin, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=20)
     address = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
+    status = models.CharField(max_length=20, default='Active')
     def __str__(self):
         return self.name
 
@@ -31,7 +31,7 @@ class Client(models.Model):
 
 class ClientDivision(models.Model):
     ClientDivisionId=models.AutoField(primary_key=True)
-    ClientId = models.ForeignKey(Client, on_delete=models.CASCADE)
+    ClientId = models.ForeignKey(Organisation, on_delete=models.CASCADE)
     DivisionId = models.ForeignKey(Division, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
