@@ -1,0 +1,44 @@
+{% extends "Default/base2.html" %}
+
+
+{% block content %}
+<h2>Manager List</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Division</th>
+            <th>Title</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if managers %}
+            {% for manager in managers %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ manager.user.first_name }} {{ manager.user.last_name }}</td>
+                <td>{{ manager.user.email }}</td>
+                <td>{{ manager.DivisionId.name }}</td>
+                <td>{{ manager.Tittle }}</td>
+                <td>{{ manager.phone }}</td>
+                <td>
+                    <a href="{% url 'update_manager' manager.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="7" class="text-center">No managers found.</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+<a href="{% url 'assign_manager' %}" class="btn btn-primary mt-2">Assign New Manager</a>
+
+{% endblock %}

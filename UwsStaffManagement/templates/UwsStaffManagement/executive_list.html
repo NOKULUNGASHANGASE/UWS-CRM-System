@@ -1,0 +1,37 @@
+{% extends "Default/base2.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Executives</h2>
+
+    <a href="{% url 'create_executive' %}" class="btn btn-primary mb-3">
+        Add Executive
+    </a>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for executive in executives %}
+            <tr>
+                <td>{{ executive.name }}</td>
+                <td>{{ executive.email }}</td>
+                <td>{{ executive.phone }}</td>
+                <td>
+                    <a href="{% url 'update_executive' executive.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'delete_executive' executive.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

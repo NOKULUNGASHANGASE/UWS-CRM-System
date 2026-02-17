@@ -1,0 +1,18 @@
+{% extends "Default/base2.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Update Division</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="name"
+               value="{{ division.name }}"
+               class="form-control mb-3">
+
+        <button class="btn btn-success">Update</button>
+    </form>
+</div>
+
+{% endblock %}
